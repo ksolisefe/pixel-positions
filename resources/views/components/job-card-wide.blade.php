@@ -1,9 +1,9 @@
-<div class="p-4 bg-white/5 rounded-xl flex flex-row justify-between min-h-40">
+<x-panel class="flex flex-row justify-between min-h-40">
     <div class="flex flex-row flex-1">
         <x-employer-logo :width="100"/>
-        <div class="flex flex-col ml-4 justify-between flex-1">
+        <div class="flex flex-col ml-4  justify-between flex-1">
             <a href="#" class="self-start text-sm text-white/40">Laracasts</a>
-            <div class="self-start text-xl font-bold mb-8">Video Producer</div>
+            <div class="self-start text-xl font-bold mb-8 group-hover:text-blue-800 group-hover:transition-colors duration-300">Video Producer</div>
             <div class="self-start text-sm text-white/40">Full Time - From $60,000.00</div>
         </div>
     </div>
@@ -19,4 +19,4 @@
             <x-tag>API</x-tag>
         </div>
     </div>
-</div>
+</x-panel>
