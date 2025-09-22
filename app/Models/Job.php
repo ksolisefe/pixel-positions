@@ -4,18 +4,34 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
+use App\Models\Tag;
 
 class Job extends Model
 {
     /** @use HasFactory<\Database\Factories\JobFactory> */
     use HasFactory;
 
-    protected $table = 'job_listings';
+    // protected $table = 'jobs';
 
-    protected $fillable = ['employer_id', 'title', 'salary'];
+    // protected $fillable = ['employer_id', 'title', 'slug', 'description', 'salary', 'location'];
     
-    public function tags()
+    public function tag(string $name): void
+    {
+       $tag = Tag::firstOrCreate(['name' => $name]);
+
+       $this->tags()->attach($tag);
+    }
+    
+    public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
+    }
+
+    public function employer(): BelongsTo
+    {
+        return $this->belongsTo(Employer::class);
     }
 }

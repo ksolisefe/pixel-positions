@@ -3,6 +3,10 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
+use App\Models\Employer;
+use App\Models\Job;
+use App\Models\Tag;
 
 return new class extends Migration
 {
@@ -13,34 +17,36 @@ return new class extends Migration
     {
         Schema::create('employers', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class);
             $table->string('name');
-            $table->timestamp();
+            $table->string('logo');
+            $table->timestamps();
         });
 
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('slug')->unique();
-            $table->timestamps();
-        });
-
-        Schema::create('job_tag', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('job_id')->constrained('jobs');
-            $table->foreignId('tag_id')->constrained('tags');
+            $table->string('name')->unique();
             $table->timestamps();
         });
 
         Schema::create('jobs', function (Blueprint $table)  {
             $table->id();
-            $table->foreignIdFor(\App\Models\Employer::class);
+            $table->foreignIdFor(Employer::class);
             $table->string('title');
-            $table->string('slug')->unique();
-            $table->text('description');
             $table->text('salary');
             $table->string('location');
-            $table->string('employer');
-            $table->string('employer_logo');
+            $table->string('schedule')->default('Full Time');
+            $table->text('description');
+            $table->string('slug')->unique();
+            $table->string('url');
+            $table->boolean('featured')->default(false);
+            $table->timestamps();
+        });
+
+        Schema::create('job_tag', function (Blueprint $table) {
+            $table->id();
+            $table->foreignIdFor(Job::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

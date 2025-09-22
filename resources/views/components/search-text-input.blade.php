@@ -1,0 +1,1 @@
+<input type="text" class="flex-1 bg-white/5 rounded-xl border-white/10 px-5 py-3 text-xl w-full max-w-xl" placeholder="Web developer...">
