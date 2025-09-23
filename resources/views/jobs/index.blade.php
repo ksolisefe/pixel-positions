@@ -1,12 +1,16 @@
 <x-layout>
     <div class="space-y-10">
-        <div class="flex flex-col gap-8 pt-6 items-center w-full">
+        <section class="text-center pt-6">
             <h1 class="text-4xl font-bold">Let us find your dream job</h1>
             
-            <div class="text-center min-w-[700px]">
+            {{-- <div class="text-center min-w-[700px]">
                 <x-search-text-input />
-            </div>
-        </div>
+            </div> --}}
+
+            <x-forms.form action="/search" class="mt-6">
+                <x-forms.input :label="false" name="q" placeholder="Web Developer" />
+            </x-forms.form>
+        </section>
         
         <section class="pt-10">
             <x-section-heading>Featured Jobs</x-section-heading>
