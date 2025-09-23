@@ -8,6 +8,7 @@ use App\Models\Job;
 use App\Models\Tag;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,7 +30,28 @@ class DatabaseSeeder extends Seeder
         
         $tags = Tag::factory(3)->create();
 
-        Job::factory(20)->hasAttached($tags)->create();
+        Job::factory(20)->hasAttached($tags)->create(new Sequence([
+            'featured' => false,
+            'schedule' => 'Full Time',
+        ], [
+            'featured' => true,
+            'schedule' => 'Part Time',
+        ], [
+            'featured' => false,
+            'schedule' => 'Contract',
+        ], [
+            'featured' => true,
+            'schedule' => 'Internship',
+        ], [
+            'featured' => false,
+            'schedule' => 'Freelance',
+        ], [
+            'featured' => true,
+            'schedule' => 'Remote',
+        ], [
+            'featured' => false,
+            'schedule' => 'Hybrid',
+        ]));
 
     }
 }
